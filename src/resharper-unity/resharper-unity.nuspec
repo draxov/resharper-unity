@@ -14,6 +14,8 @@
 &#8226; Suppress naming consistency checks on message handlers
 &#8226; Automatically sets Unity projects to C# 5. No more incompatible C# 6 suggestions!
 &#8226; Prevent ReSharper from suggesting `Assets` or `Scripts` as part of the namespace of your code
+
+Extended by Draxov
 </description>
 <releaseNotes>
 &#8226; ReSharper 2016.1 support
