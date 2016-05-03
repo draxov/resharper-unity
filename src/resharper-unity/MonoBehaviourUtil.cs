@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using DevExpress.Data.Browsing;
 using JetBrains.Annotations;
+using JetBrains.Application.DataContext;
+using JetBrains.DocumentModel;
+using JetBrains.DocumentModel.DataContext;
 using JetBrains.Metadata.Reader.API;
 using JetBrains.Metadata.Reader.Impl;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.Modules;
+using JetBrains.UI.BindableLinq.Interfaces;
+using JetBrains.Util.Logging;
 
 namespace JetBrains.ReSharper.Plugins.Unity
 {

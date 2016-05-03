@@ -185,8 +185,13 @@
     <Compile Include="MonoBehaviourUtil.cs" />
     <Compile Include="NamingConsistencyWarningSuppressor.cs" />
     <Compile Include="ProjectModel\Properties\Flavours\UnityProjectFlavor.cs" />
+    <Compile Include="UnitySettingsAccessor.cs" />
     <Compile Include="UnityEnginePredefinedType.cs" />
-    <Compile Include="UnityConfigurationPage.cs" />
+    <Compile Include="UnitySettings.cs" />
+    <Compile Include="UnityOptionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UnitySolution.cs" />
     <Compile Include="UsageInspectionsSuppressor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityConfigurationControl.xaml.cs">
@@ -200,8 +205,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UnityConfigurationPage.resx">
-      <DependentUpon>UnityConfigurationPage.cs</DependentUpon>
+    <EmbeddedResource Include="UnitySettings.resx">
+      <DependentUpon>UnitySettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

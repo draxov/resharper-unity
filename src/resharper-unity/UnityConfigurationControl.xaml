@@ -7,16 +7,14 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Height="Auto" Width="Auto">
+
+    <UserControl.Resources>
+        <CollectionViewSource Source="{Binding}" x:Key="DataView"></CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="UnityClassesListBox" Margin="10,50,10,10" Selected="UnityClassesListBox_OnSelected">
-            <DataTemplate>
-                <StackPanel>
-                    <TextBlock Text="UnityClass" />
-                </StackPanel>
-            </DataTemplate>
-        </ListBox>
+        <DataGrid Name="UnityClassesDataGrid" Margin="0,48,0,0" RowHeight="25" ColumnWidth="Auto" ItemsSource="{Binding Source={StaticResource DataView}}"/>
         <Button x:Name="button" Content="+"  Margin="0,18,11,0" HorizontalAlignment="Right" Width="25
-                " Height="25" VerticalAlignment="Top" Click="button_Click" 
-                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext}"/>
+                " Height="25" VerticalAlignment="Top" Click="button_Click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="22,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </UserControl>

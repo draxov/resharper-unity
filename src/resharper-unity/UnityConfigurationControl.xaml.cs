@@ -1,55 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.UI.CrossFramework;
+using JetBrains.UI.Options;
+using JetBrains.UI.Resources;
 
 namespace JetBrains.ReSharper.Plugins.Unity
 {
     /// <summary>
     /// Interaction logic for UnityConfigurationControl.xaml
     /// </summary>
-    public partial class UnityConfigurationControl : UserControl
+    public partial class UnityConfigurationControl : IOptionsPage
     {
-        public UnityConfigurationControl()
+        public static readonly DependencyProperty UnityClassesProperty = 
+            DependencyProperty.Register(
+                "UnityClasses", typeof(ObservableCollection<string>), typeof(UnityConfigurationControl));
+        private readonly OptionsSettingsSmartContext m_settings;
+        private const string UNITY_CONFIGURATION_PAGE = "UNITY_CONFIGURATION_PAGE";
+        
+        public EitherControl Control => this;
+        public string Id => UNITY_CONFIGURATION_PAGE;
+
+        public ObservableCollection<string> UnityClasses
         {
+            get { return (ObservableCollection<string>)GetValue(UnityClassesProperty); }
+            set { SetValue(UnityClassesProperty, value); }
+        }
+
+        public UnityConfigurationControl(Lifetime lifetime, OptionsSettingsSmartContext settings)
+        {
+            m_settings = settings;
             InitializeComponent();
+//            Expression<Func<UnitySettings, ObservableCollection<string>>> expression = s => s.TestCollection;
+//            settings.SetBinding(lifetime, expression, this, UnityClassesProperty);
+            SetValue(UnityClassesProperty, new ObservableCollection<string>());
+            DataContext = GetValue(UnityClassesProperty);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            UnityClassesListBox.Items.Add("New Class");
+            ObservableCollection<string> value = (ObservableCollection<string>) GetValue(UnityClassesProperty);
+            value.Add("New Class");
         }
 
-        private void Label_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        public bool OnOk()
         {
-            
+            return true;
         }
 
-        private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+        public bool ValidatePage()
         {
-            if (e.Key != Key.Return)
-            {
-                return;
-            }
-        }
-
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UnityClassesListBox_OnSelected(object sender, RoutedEventArgs e)
-        {
+            return true;
         }
     }
 }
