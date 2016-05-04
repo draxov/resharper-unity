@@ -3,44 +3,21 @@ using System.Linq;
 using JetBrains.Annotations;
 using JetBrains.Application;
 using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
 using JetBrains.Metadata.Reader.Impl;
-using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Modules;
 
 namespace JetBrains.ReSharper.Plugins.Unity
 {
     [ShellComponent]
-    public class UnitySolution
+    public class UnitySolutionHelper
     {
-        private readonly SolutionsManager m_solutionsManager;
         private readonly UnitySettings m_unitySettings;
-        private readonly SettingsKey m_settingsKey;
-        private Lifetime m_lifetime;
 
-        public UnitySolution(ISettingsStore settingsStore, Lifetime lifetime, SolutionsManager solutionsManager)
+        public UnitySolutionHelper(ISettingsStore settingsStore)
         {
-            m_solutionsManager = solutionsManager;
-            m_lifetime = lifetime;
             IContextBoundSettingsStore boundSettings = settingsStore.BindToContextTransient(ContextRange.ApplicationWide);
             m_unitySettings = boundSettings.GetKey<UnitySettings>(SettingsOptimization.DoMeSlowly);
-            m_settingsKey = boundSettings.Schema.GetKey<UnitySettings>();
-            settingsStore.Changed.Advise(lifetime, SettingsChanged);
-        }
-
-        private void SettingsChanged(SettingsStoreChangeArgs settingsStoreChangeArgs)
-        {
-            bool hasChanged = settingsStoreChangeArgs.ChangedKeys.Contains(m_settingsKey);
-            if (!hasChanged)
-            {
-                return;
-            }
-            ISolution iSolution = m_solutionsManager.Solution;
-            if (null == iSolution)
-            {
-                return;
-            }
         }
 
         public bool IsUnityImplicitType([NotNull] ITypeElement typeElement, [NotNull] IPsiModule module)

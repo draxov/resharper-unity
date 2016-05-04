@@ -179,6 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultUnitySettings.cs" />
     <Compile Include="Settings\PerProjectSettings.cs" />
     <Compile Include="MessageHandlerGeneratorProvider.cs" />
     <Compile Include="MonoBehaviourEvent.cs" />
@@ -191,12 +192,10 @@
     <Compile Include="UnityOptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UnitySolution.cs" />
+    <Compile Include="UnitySettingsChangedHandler.cs" />
+    <Compile Include="UnitySolutionHelper.cs" />
     <Compile Include="UsageInspectionsSuppressor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnityConfigurationControl.xaml.cs">
-      <DependentUpon>UnityConfigurationControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,12 +207,6 @@
     <EmbeddedResource Include="UnitySettings.resx">
       <DependentUpon>UnitySettings.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="UnityConfigurationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
